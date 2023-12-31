@@ -1,5 +1,4 @@
 import { ipcRenderer } from 'electron'
-import type { ProgressInfo } from 'electron-updater'
 import { useCallback, useEffect, useState } from 'react'
 import Modal from '@/components/update/Modal'
 import Progress from '@/components/update/Progress'
@@ -7,16 +6,11 @@ import Progress from '@/components/update/Progress'
 const Update = () => {
   const [checking, setChecking] = useState(false)
   const [updateAvailable, setUpdateAvailable] = useState(false)
-  const [versionInfo, setVersionInfo] = useState<VersionInfo>()
-  const [updateError, setUpdateError] = useState<ErrorType>()
-  const [progressInfo, setProgressInfo] = useState<Partial<ProgressInfo>>()
-  const [modalOpen, setModalOpen] = useState<boolean>(false)
-  const [modalBtn, setModalBtn] = useState<{
-    cancelText?: string
-    okText?: string
-    onCancel?: () => void
-    onOk?: () => void
-  }>({
+  const [versionInfo, setVersionInfo] = useState()
+  const [updateError, setUpdateError] = useState()
+  const [progressInfo, setProgressInfo] = useState()
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalBtn, setModalBtn] = useState({
     onCancel: () => setModalOpen(false),
     onOk: () => ipcRenderer.invoke('start-download'),
   })
@@ -36,7 +30,7 @@ const Update = () => {
     }
   }
 
-  const onUpdateCanAvailable = useCallback((_event: Electron.IpcRendererEvent, arg1: VersionInfo) => {
+  const onUpdateCanAvailable = useCallback((_event, arg1) => {
     setVersionInfo(arg1)
     setUpdateError(undefined)
     // Can be update
@@ -53,16 +47,16 @@ const Update = () => {
     }
   }, [])
 
-  const onUpdateError = useCallback((_event: Electron.IpcRendererEvent, arg1: ErrorType) => {
+  const onUpdateError = useCallback((_event, arg1) => {
     setUpdateAvailable(false)
     setUpdateError(arg1)
   }, [])
 
-  const onDownloadProgress = useCallback((_event: Electron.IpcRendererEvent, arg1: ProgressInfo) => {
+  const onDownloadProgress = useCallback((_event, arg1) => {
     setProgressInfo(arg1)
   }, [])
 
-  const onUpdateDownloaded = useCallback((_event: Electron.IpcRendererEvent, ...args: any[]) => {
+  const onUpdateDownloaded = useCallback((_event, ...args) => {
     setProgressInfo({ percent: 100 })
     setModalBtn(state => ({
       ...state,
@@ -97,7 +91,7 @@ const Update = () => {
         onOk={modalBtn?.onOk}
         footer={updateAvailable ? /* hide footer */null : undefined}
       >
-        <div className='modal-slot'>
+        <div className='modal-'>
           {updateError
             ? (
               <div>
@@ -122,7 +116,7 @@ const Update = () => {
               )}
         </div>
       </Modal>
-      <button className='btn' disabled={checking} onClick={checkUpdate}>
+      <button className='btn btn-primary' disabled={checking} onClick={checkUpdate}>
         {checking ? 'Checking...' : 'Check update'}
       </button>
     </>

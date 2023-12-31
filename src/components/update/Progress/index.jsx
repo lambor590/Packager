@@ -1,9 +1,7 @@
 import React from 'react'
 import './progress.css'
 
-const Progress: React.FC<React.PropsWithChildren<{
-  percent?: number
-}>> = props => {
+const Progress = props => {
   const { percent = 0 } = props
 
   return (

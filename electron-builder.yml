@@ -49,5 +49,3 @@ directories:
 
 publish:
   - provider: 'github'
-  - private: true
-  - releaseType: 'release'

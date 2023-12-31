@@ -1,11 +1,7 @@
 import { app, ipcMain } from 'electron'
-import {
-  type ProgressInfo,
-  type UpdateDownloadedEvent,
-  autoUpdater
-} from 'electron-updater'
+import { autoUpdater } from 'electron-updater'
 
-export function update(win: Electron.BrowserWindow) {
+export function update(win) {
 
   // When set to false, the update download will be triggered through the API
   autoUpdater.autoDownload = false
@@ -62,10 +58,7 @@ export function update(win: Electron.BrowserWindow) {
   })
 }
 
-function startDownload(
-  callback: (error: Error | null, info: ProgressInfo | null) => void,
-  complete: (event: UpdateDownloadedEvent) => void,
-) {
+function startDownload(callback, complete) {
   autoUpdater.on('download-progress', info => callback(null, info))
   autoUpdater.on('error', error => callback(error, null))
   autoUpdater.on('update-downloaded', complete)

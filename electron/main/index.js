@@ -21,7 +21,7 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 
-let win: BrowserWindow | null = null
+let win = null
 
 const preload = join(__dirname, '../preload/index.js')
 const url = process.env.VITE_DEV_SERVER_URL

@@ -31,9 +31,6 @@ function App() {
       <div className='flex-center'>
         Place static files into the<code>/public</code> folder
       </div>
-      <button className='btn'>
-        hola
-      </button>
 
       <UpdateElectron />
     </div>

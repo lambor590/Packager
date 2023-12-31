@@ -2,15 +2,7 @@ import React, { ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import './modal.css'
 
-const ModalTemplate: React.FC<React.PropsWithChildren<{
-  title?: ReactNode
-  footer?: ReactNode
-  cancelText?: string
-  okText?: string
-  onCancel?: () => void
-  onOk?: () => void
-  width?: number
-}>> = props => {
+const ModalTemplate = props => {
   const {
     title,
     children,
@@ -23,8 +15,7 @@ const ModalTemplate: React.FC<React.PropsWithChildren<{
   } = props
 
   return (
-    <div className='update-modal'>
-      <div className='update-modal__mask' />
+    <div className='modal'>
       <div className='update-modal__warp'>
         <div className='update-modal__content' style={{ width }}>
           <div className='content__header'>
@@ -55,7 +46,7 @@ const ModalTemplate: React.FC<React.PropsWithChildren<{
   )
 }
 
-const Modal = (props: Parameters<typeof ModalTemplate>[0] & { open: boolean }) => {
+const Modal = (props) => {
   const { open, ...omit } = props
 
   return createPortal(
