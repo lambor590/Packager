@@ -1,0 +1,53 @@
+appId: 'packager'
+productName: 'Packager'
+artifactName: '${productName}-${version}.${ext}'
+
+copyright: 'Copyright © 2019-2023 Marc Correale'
+
+asar: true
+compression: 'maximum'
+
+files:
+  - 'dist-electron'
+  - 'dist'
+
+# Windows Configuration
+win: 
+  target: 
+    - target: 'nsis'
+      arch: 'x64'
+
+# Windows Installer Configuration
+nsis:
+  oneClick: false
+  perMachine: false
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+
+# macOS Configuration
+mac:
+  target:
+    - target: 'dmg'
+      arch:
+        - 'x64'
+        - 'arm64'
+  artifactName: '${productName}-${version}-${arch}.${ext}'
+  category: 'public.app-category.utilities'
+
+# Linux Configuration
+linux: 
+  target: 'AppImage'
+  maintainer: 'Marc Correale'
+  vendor: 'Marc Correale'
+  synopsis: 'Gestor de paquetes'
+  description: 'Gestor de paquetes para Parcel Shops para gestionar todo en un mismo lugar de forma rápida y sencilla.'
+  category: 'Accessories'
+
+directories:
+  buildResources: 'build'
+  output: 'release/${version}'
+
+publish:
+  - provider: 'github'
+  - private: true
+  - releaseType: 'release'
