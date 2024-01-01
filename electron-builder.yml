@@ -2,7 +2,7 @@ appId: 'packager'
 productName: 'Packager'
 artifactName: '${productName}-${version}.${ext}'
 
-copyright: 'Copyright © 2019-2023 Marc Correale'
+copyright: 'Copyright © 2019-2024 Marc Correale'
 
 asar: true
 compression: 'maximum'

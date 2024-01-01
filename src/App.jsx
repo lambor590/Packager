@@ -1,39 +1,34 @@
 import { useState } from 'react'
-import UpdateElectron from '@/components/update'
-import logoVite from './assets/logo-vite.svg'
-import logoElectron from './assets/logo-electron.svg'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
 import './App.css'
-
-console.log('[App.tsx]', `Hello world from Electron ${process.versions.electron}!`)
 
 function App() {
   const [count, setCount] = useState(0)
+
   return (
-    <div className='App'>
-      <div className='logo-box'>
-        <a href='https://github.com/electron-vite/electron-vite-react' target='_blank'>
-          <img src={logoVite} className='logo vite' alt='Electron + Vite logo' />
-          <img src={logoElectron} className='logo electron' alt='Electron + Vite logo' />
+    <>
+      <div>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Electron + Vite + React</h1>
-      <div className='card'>
+      <h1>Vite + React</h1>
+      <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
-      <p className='read-the-docs'>
-        Click on the Electron + Vite logo to learn more
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
       </p>
-      <div className='flex-center'>
-        Place static files into the<code>/public</code> folder
-      </div>
-
-      <UpdateElectron />
-    </div>
+    </>
   )
 }
 
