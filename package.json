@@ -1,7 +1,7 @@
 {
   "name": "packager",
   "productName": "Packager",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "main": "dist-electron/main/index.js",
   "description": "Gestor de paquetes para Parcel Shops para gestionar todo en un mismo lugar de forma rápida y sencilla.",
   "author": "Marc Correale",
