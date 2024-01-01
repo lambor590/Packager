@@ -58,7 +58,7 @@ async function createWindow() {
   })
 
   // Apply electron-updater
-  update(win)
+  update()
 }
 
 app.whenReady().then(createWindow)
