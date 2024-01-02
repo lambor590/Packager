@@ -1,5 +1,6 @@
 :root {
   font-family: system-ui, -apple-system, Ubuntu, sans-serif;
+  user-select: none;
 }
 
 body {
