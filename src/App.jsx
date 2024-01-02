@@ -1,23 +1,25 @@
 import { useState } from 'react'
+import { ipcRenderer } from 'electron'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [appVersion, setAppVersion] = useState('')
+
+  ipcRenderer.send('get-app-version');
+  ipcRenderer.once('app-version', (event, version) => setAppVersion(version));
 
   return (
     <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+      <h1>Packager</h1>
+      <div>
+        <button className='btn btn-primary' onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          Version {appVersion}
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
