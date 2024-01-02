@@ -1,25 +1,29 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ipcRenderer } from 'electron'
+import UpdateModal from './components/UpdateModal'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
   const [appVersion, setAppVersion] = useState('')
 
-  ipcRenderer.send('get-app-version');
-  ipcRenderer.once('app-version', (event, version) => setAppVersion(version));
+  useEffect(() => {
+    ipcRenderer.invoke('get-app-version').then(version => {
+      setAppVersion(version)
+    })
+  }, [])
 
   return (
     <>
       <h1>Packager</h1>
       <div>
-        <button className='btn btn-primary' onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button className='btn btn-primary'>
+          Test Button
         </button>
         <p>
           Version {appVersion}
         </p>
       </div>
+      <UpdateModal />
     </>
   )
 }
