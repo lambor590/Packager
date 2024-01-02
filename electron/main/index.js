@@ -29,8 +29,11 @@ const indexHtml = join(process.env.DIST, 'index.html')
 
 async function createWindow() {
   win = new BrowserWindow({
-    title: 'Main window',
+    title: 'Packager',
     icon: join(process.env.VITE_PUBLIC, 'favicon.ico'),
+    width: 1200,
+    height: 720,
+    autoHideMenuBar: true,
     webPreferences: {
       preload,
       nodeIntegration: true,
@@ -46,22 +49,15 @@ async function createWindow() {
     win.loadFile(indexHtml)
   }
 
-  // Test actively push message to the Electron-Renderer
-  win.webContents.on('did-finish-load', () => {
-    win?.webContents.send('main-process-message', new Date().toLocaleString())
-  })
-
   // Make all links open with the browser, not with the application
   win.webContents.setWindowOpenHandler(({ url }) => {
     if (url.startsWith('https:')) shell.openExternal(url)
     return { action: 'deny' }
   })
-
-  // Apply electron-updater
-  update(win)
 }
 
 app.whenReady().then(createWindow)
+
 
 app.on('window-all-closed', () => {
   win = null
@@ -85,20 +81,16 @@ app.on('activate', () => {
   }
 })
 
-// New window example arg: new windows url
-ipcMain.handle('open-win', (_, arg) => {
-  const childWindow = new BrowserWindow({
-    webPreferences: {
-      preload,
-      nodeIntegration: true,
-      contextIsolation: false,
-    },
-  })
-
-  if (process.env.VITE_DEV_SERVER_URL) {
-    childWindow.loadURL(`${url}#${arg}`)
-  } else {
-    childWindow.loadFile(indexHtml, { hash: arg })
-  }
+ipcMain.handle("get-app-version", () => {
+  return app.getVersion()
 })
 
+ipcMain.on("do-action", (event, arg, data) => {
+  switch (arg) {
+    case "initAutoUpdater":
+      update(event)
+      break
+    default:
+      break
+  }
+})
