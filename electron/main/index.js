@@ -54,8 +54,6 @@ async function createWindow() {
     if (url.startsWith('https:')) shell.openExternal(url)
     return { action: 'deny' }
   })
-
-  update()
 }
 
 app.whenReady().then(createWindow)
@@ -83,6 +81,16 @@ app.on('activate', () => {
   }
 })
 
-ipcMain.on("get-app-version", (event) => {
-  event.sender.send("app-version", app.getVersion())
+ipcMain.handle("get-app-version", () => {
+  return app.getVersion()
+})
+
+ipcMain.on("do-action", (event, arg, data) => {
+  switch (arg) {
+    case "initAutoUpdater":
+      update(event)
+      break
+    default:
+      break
+  }
 })
