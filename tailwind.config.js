@@ -4,11 +4,20 @@ export default {
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
   ],
-  theme: {
-    extend: {},
-  },
   corePlugins: {
     preflight: false,
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: [
+      {
+        dark: {
+          ...require("daisyui/src/theming/themes")["dark"],
+          primary: "#d8923d",
+          secondary: "#ffd05c",
+          accent: "orange",
+        },
+      },
+    ],
+  },
 }
