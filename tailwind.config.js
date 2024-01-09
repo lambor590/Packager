@@ -17,6 +17,12 @@ export default {
           secondary: "#ffd05c",
           accent: "orange",
         },
+        light: {
+          ...require("daisyui/src/theming/themes")["light"],
+          primary: "#d8923d",
+          secondary: "#ffd05c",
+          accent: "orange",
+        },
       },
     ],
   },
