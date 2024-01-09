@@ -17,10 +17,10 @@ function App() {
       <h1>Packager</h1>
       <div>
         <button className='btn btn-primary'>
-          Test Button
+          Botón de prueba
         </button>
         <p>
-          Version {appVersion}
+          Versión {appVersion}
         </p>
       </div>
       <UpdateModal />
