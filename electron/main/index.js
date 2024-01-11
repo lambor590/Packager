@@ -29,7 +29,7 @@ const indexHtml = join(process.env.DIST, 'index.html')
 
 async function createWindow() {
   win = new BrowserWindow({
-    title: 'Packager',
+    title: `Packager | v${app.getVersion()}`,
     icon: join(process.env.VITE_PUBLIC, 'favicon.ico'),
     width: 1200,
     height: 720,
@@ -79,10 +79,6 @@ app.on('activate', () => {
   } else {
     createWindow()
   }
-})
-
-ipcMain.handle("get-app-version", () => {
-  return app.getVersion()
 })
 
 ipcMain.on("do-action", (event, arg, data) => {
