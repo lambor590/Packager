@@ -1,31 +1,27 @@
 import { useState, useEffect } from 'react'
+import { checkUpdate, installUpdate } from '@tauri-apps/api/updater';
+import Countdown from './Countdown';
 import Modal from './Modal'
-import ProgressBar from './ProgressBar'
 
 function UpdateModal() {
   const [isOpen, setIsOpen] = useState(false)
-  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    // ipcRenderer.on('update-available', () => {
-    //   setIsOpen(true)
-    // })
-    // ipcRenderer.on('download-progress', (_event, progressInfo) => {
-    //   setProgress(progressInfo.percent)
-    // })
-
-    // return () => {
-    //   ipcRenderer.removeListener('update-available', setIsOpen(true))
-    //   ipcRenderer.removeListener('download-progress', (_event, progressInfo) => {
-    //     setProgress(progressInfo.percent)
-    //   })
-    // }
+    async function update() {
+      const update = await checkUpdate();
+      if (update.shouldUpdate) {
+        setIsOpen(true)
+        setTimeout(async () => {
+          await installUpdate();
+        }, 2500);
+      }
+    }
+    update()
   }, [])
 
   return (
-    <Modal isOpen={isOpen} title="Actualización disponible" canBeDismissed={false}>
-      {progress >= 90 ? 'Instalando actualización...' : 'Descargando actualización...'}
-      <ProgressBar percentage={progress} />
+    <Modal isOpen={isOpen} title="Actualización disponible" message="La aplicación se va a reiniciar para aplicar la actualización." canBeDismissed={false}>
+      <Countdown initialNumber={3} />
     </Modal>
   )
 }
