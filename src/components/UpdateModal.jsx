@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { ipcRenderer } from 'electron'
 import Modal from './Modal'
 import ProgressBar from './ProgressBar'
 
@@ -8,20 +7,19 @@ function UpdateModal() {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
+    // ipcRenderer.on('update-available', () => {
+    //   setIsOpen(true)
+    // })
+    // ipcRenderer.on('download-progress', (_event, progressInfo) => {
+    //   setProgress(progressInfo.percent)
+    // })
 
-    ipcRenderer.on('update-available', () => {
-      setIsOpen(true)
-    })
-    ipcRenderer.on('download-progress', (_event, progressInfo) => {
-      setProgress(progressInfo.percent)
-    })
-
-    return () => {
-      ipcRenderer.removeListener('update-available', setIsOpen(true))
-      ipcRenderer.removeListener('download-progress', (_event, progressInfo) => {
-        setProgress(progressInfo.percent)
-      })
-    }
+    // return () => {
+    //   ipcRenderer.removeListener('update-available', setIsOpen(true))
+    //   ipcRenderer.removeListener('download-progress', (_event, progressInfo) => {
+    //     setProgress(progressInfo.percent)
+    //   })
+    // }
   }, [])
 
   return (
