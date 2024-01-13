@@ -47,6 +47,8 @@ jobs:
         with:
           tagName: packager-v__VERSION__ 
           releaseName: 'Packager v__VERSION__'
-          releaseBody: 'See the assets to download this version and install.\n\nMira los assets para descargar esta versión e instalarla.'
+          releaseBody: |
+            See the assets to download this version and install.
+            Mira los assets para descargar esta versión e instalarla.
           prerelease: ${{ github.ref == 'refs/heads/dev' }}
           updaterJsonPreferNsis: true
