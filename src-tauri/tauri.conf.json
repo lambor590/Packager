@@ -1,0 +1,74 @@
+{
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist"
+  },
+  "package": {
+    "productName": "Packager",
+    "version": "../package.json"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "shell": {
+        "all": false,
+        "open": true
+      }
+    },
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.packager.app",
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "windows": {
+        "wix": {
+          "language": [
+            "en-US",
+            "es-ES"
+          ]
+        },
+        "nsis": {
+          "languages": [
+            "English",
+            "Spanish"
+          ],
+          "installerIcon": "icons/icon.ico"
+        }
+      },
+      "category": "Utility",
+      "copyright": "Copyright © 2024 Marc Correale",
+      "publisher": "Marc Correale",
+      "longDescription": "Gestor de paquetes para Parcel Shops con el objetivo de gestionar todo en un mismo lugar de forma más sencilla.",
+      "shortDescription": "Packager"
+    },
+    "security": {
+      "csp": null
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true,
+        "title": "Packager",
+        "width": 1200,
+        "height": 720,
+        "center": true,
+        "contentProtected": true
+      }
+    ],
+    "updater": {
+      "active": true,
+      "endpoints": [
+        "https://github.com/lambor590/Packager/releases/latest/download/latest.yml"
+      ],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEEwRjkyMjEyNDdGQkYyN0EKUldSNjh2dEhFaUw1b0ZNdTFqeUl3ejhxZHJaNFdsN2swaDlLUUpkRFFaZlVZcmRMb1poRHlnUlIK"
+    }
+  }
+}
