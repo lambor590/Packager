@@ -65,6 +65,7 @@
     ],
     "updater": {
       "active": true,
+      "dialog": false,
       "endpoints": [
         "https://github.com/lambor590/Packager/releases/latest/download/latest.json"
       ],
