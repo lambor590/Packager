@@ -54,13 +54,25 @@
     },
     "windows": [
       {
+        "width": 590,
+        "height": 590,
+        "decorations": false,
+        "url": "splash.html",
+        "center": true,
+        "label": "splash",
+        "transparent": true,
+        "skipTaskbar": true,
+        "resizable": false,
+        "alwaysOnTop": true
+      },
+      {
         "fullscreen": false,
         "resizable": true,
         "title": "Packager",
         "width": 1200,
         "height": 720,
         "center": true,
-        "contentProtected": true
+        "visible": false
       }
     ],
     "updater": {
