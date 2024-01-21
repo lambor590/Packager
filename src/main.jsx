@@ -8,4 +8,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     <App />
   )
   await invoke('close_splash')
+  document.removeEventListener('DOMContentLoaded', () => {})
 })
